@@ -47,7 +47,6 @@ Pré-requisitos
 1. Clone o repositório
 ```bash
 git clone git@github.com:francastelobranco/desafio.git
-cd desafio
 ```
 2. Crie o banco MySQL:
 ```bash
@@ -67,13 +66,6 @@ O parâmetro createDatabaseIfNotExist=true permite que o banco seja criado autom
 ```bash
 ./mvnw spring-boot:run
 ```
-5. Testar os endpoints
-   
-   Uma vez que a aplicação esteja rodando, acesse:
-```bash
-POST http://localhost:8080/upload
-GET  http://localhost:8080/user/find
-```
 
 ## Testes
 Para executar os testes unitários:
@@ -90,8 +82,7 @@ Relatório gerado em `target/site/jacoco/index.html`.
 ## API
 - **URL:** `/user/upload`
 - **Método:** `POST`
-
-Recebe um `.txt` com dados desnormalizados e persiste usuários, pedidos e produtos.
+- **Descrição:** Recebe um `.txt` com dados desnormalizados e persiste usuários, pedidos e produtos.
 
 #### Resposta:
 
