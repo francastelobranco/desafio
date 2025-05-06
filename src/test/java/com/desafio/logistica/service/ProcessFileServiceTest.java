@@ -56,7 +56,6 @@ class ProcessFileServiceTest {
         assertEquals(100, order.getOrderId());
         assertEquals(2, order.getProducts().size());
 
-        // 150.50 + 49.50 = 200.00
         assertEquals(new BigDecimal("200.00"), order.getTotal());
     }
     @Test
