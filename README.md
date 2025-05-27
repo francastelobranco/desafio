@@ -86,11 +86,11 @@ Relatório gerado em `target/site/jacoco/index.html`.
 
 #### Resposta:
 
-| Status | Endpoint          | Descrição                                      | 
-|--------|-------------------|------------------------------------------------| 
-| 204    | NO CONTENT        | Arquivo processado com sucesso e dados salvos. |
-| 400    | BAD REQUEST       | Formato inválido ou erro ao ler o arquivo.     |
-| 413    | PAYLOAD TOO LARGE | Tamanho do arquivo excede o limite.            |
+| Status | Endpoint              | Descrição                                      | 
+|--------|-----------------------|------------------------------------------------| 
+| 204    | NO CONTENT            | Arquivo processado com sucesso e dados salvos. |
+| 400    | BAD REQUEST           | Formato inválido ou erro ao ler o arquivo.     |
+| 413    | PAYLOAD TOO LARGE     | Tamanho do arquivo excede o limite.            |
 
 ##### Buscar Usuários com Filtros:
 - **URL:** `/user/find`
@@ -109,8 +109,12 @@ Relatório gerado em `target/site/jacoco/index.html`.
 | Status | Endpoint              | Descrição                                      | 
 |--------|-----------------------|------------------------------------------------| 
 | 200    | OK                    | Retorna lista de `UserDto`                     |
+| 400    | BAD REQUEST           | Intervalo de datas inválido: `startDate` não pode ser posterior a `endDate`.|
 | 404    | NOT FOUND             | Pedido não encontrado para o filtro informado. |
 | 500    | INTERNAL SERVER ERROR | Erro interno.                                  |
+
+> ⚠️ Observação: Caso ambos os parâmetros `startDate` e `endDate` sejam informados, `startDate` não pode ser posterior a `endDate`.
+
 #### Resposta de exemplo (JSON)
 ```json
 [
