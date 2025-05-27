@@ -8,5 +8,7 @@ public class ConstantsUtils {
     public static final String MESSAGE = "message";
     public static final String PATH = "path";
     public static final String ERROR_500 = "System error. Please contact your service administrator.";
-
+    public static final String ERROR_ORDER_NOT_FOUND = "Order with ID %d not found.";
+    public static final String ERROR_FILE_READ = "Error reading file: %s";
+    public static final String ERROR_ORDER_ID_NULL = "Order ID must not be null.";
 }

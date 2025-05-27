@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
+import static com.desafio.logistica.utils.ConstantsUtils.ERROR_ORDER_ID_NULL;
+
 @Service
 public class UserService {
 
@@ -93,8 +95,12 @@ public class UserService {
     }
 
     private void validateExistingOrder(Integer orderId) {
-       if (!orderService.existsById(orderId)) {
-           throw new OrderNotFoundException("Order with ID " + orderId + " not found.");
+        if (orderId == null) {
+            throw new IllegalArgumentException(ERROR_ORDER_ID_NULL);
+        }
+
+        if (!orderService.existsById(orderId)) {
+           throw new OrderNotFoundException(orderId);
        }
     }
 }
