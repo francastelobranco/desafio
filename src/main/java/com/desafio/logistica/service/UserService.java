@@ -55,10 +55,6 @@ public class UserService {
     public List<UserDto> findUsersWithOrdersAndProducts(
             Integer orderId, LocalDate startDate, LocalDate endDate) {
 
-        if (orderId == null) {
-            throw new IllegalArgumentException(ERROR_ORDER_ID_NULL);
-        }
-
         validateOrderId(orderId);
         validDate(startDate, endDate);
 
@@ -99,6 +95,10 @@ public class UserService {
     }
 
     private void validateOrderId(Integer orderId) {
+        if (orderId == null) {
+            throw new IllegalArgumentException(ERROR_ORDER_ID_NULL);
+        }
+
         if (!orderService.existsById(orderId)) {
            throw new OrderNotFoundException(orderId);
        }
