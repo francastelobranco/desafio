@@ -3,6 +3,7 @@ package com.desafio.logistica.service;
 import com.desafio.logistica.dto.OrderDto;
 import com.desafio.logistica.dto.ProductDto;
 import com.desafio.logistica.dto.UserDto;
+import com.desafio.logistica.exeption.InvalidDateIntervalException;
 import com.desafio.logistica.exeption.OrderNotFoundException;
 import com.desafio.logistica.model.UserEntity;
 import com.desafio.logistica.repository.UserRepository;
@@ -66,6 +67,21 @@ class UserServiceTest {
     }
 
     @Test
+    void whenOrderIdIsNullThenThrowIllegalArgumentException() {
+        Integer orderId = null;
+        LocalDate start = LocalDate.of(2023, 1, 1);
+        LocalDate end = LocalDate.of(2023, 12, 31);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> userService.findUsersWithOrdersAndProducts(orderId, start, end)
+        );
+
+        assertEquals("Order ID must not be null.", exception.getMessage());
+    }
+
+
+    @Test
     void shouldReturnUserDtosGroupedByOrderAndProduct() {
         when(orderService.existsById(100)).thenReturn(true);
 
@@ -101,5 +117,17 @@ class UserServiceTest {
         assertTrue(products.stream().anyMatch(p ->
                 p.getProductId() == 201 && p.getValue().equals(new BigDecimal("50.00"))
         ));
+    }
+
+    @Test
+    void whenStartDateAfterEndDateThenThrowInvalidDateIntervalException() {
+        when(orderService.existsById(100)).thenReturn(true);
+        LocalDate startDate = LocalDate.of(2025, 12, 31);
+        LocalDate endDate = LocalDate.of(2025, 1, 1);
+
+        assertThrows(
+                InvalidDateIntervalException.class,
+                () -> userService.findUsersWithOrdersAndProducts(100, startDate, endDate)
+        );
     }
 }

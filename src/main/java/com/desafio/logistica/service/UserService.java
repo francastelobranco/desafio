@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
-import static com.desafio.logistica.utils.ConstantsUtils.ERROR_DATE_INTERVAL_INVALID;
 import static com.desafio.logistica.utils.ConstantsUtils.ERROR_ORDER_ID_NULL;
 
 @Service
@@ -56,10 +55,11 @@ public class UserService {
     public List<UserDto> findUsersWithOrdersAndProducts(
             Integer orderId, LocalDate startDate, LocalDate endDate) {
 
-        if (orderId != null) {
-            validateExistingOrder(orderId);
+        if (orderId == null) {
+            throw new IllegalArgumentException(ERROR_ORDER_ID_NULL);
         }
 
+        validateOrderId(orderId);
         validDate(startDate, endDate);
 
         Date start = DateFormatUtils.formatDate(startDate);
@@ -98,11 +98,7 @@ public class UserService {
         return new ArrayList<>(userMap.values());
     }
 
-    private void validateExistingOrder(Integer orderId) {
-        if (orderId == null) {
-            throw new IllegalArgumentException(ERROR_ORDER_ID_NULL);
-        }
-
+    private void validateOrderId(Integer orderId) {
         if (!orderService.existsById(orderId)) {
            throw new OrderNotFoundException(orderId);
        }
