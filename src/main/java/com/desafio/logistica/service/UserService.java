@@ -4,6 +4,7 @@ package com.desafio.logistica.service;
 import com.desafio.logistica.dto.OrderDto;
 import com.desafio.logistica.dto.ProductDto;
 import com.desafio.logistica.dto.UserDto;
+import com.desafio.logistica.exeption.InvalidDateIntervalException;
 import com.desafio.logistica.exeption.OrderNotFoundException;
 import com.desafio.logistica.model.OrderEntity;
 import com.desafio.logistica.model.ProductEntity;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
+import static com.desafio.logistica.utils.ConstantsUtils.ERROR_DATE_INTERVAL_INVALID;
 import static com.desafio.logistica.utils.ConstantsUtils.ERROR_ORDER_ID_NULL;
 
 @Service
@@ -57,6 +59,8 @@ public class UserService {
         if (orderId != null) {
             validateExistingOrder(orderId);
         }
+
+        validDate(startDate, endDate);
 
         Date start = DateFormatUtils.formatDate(startDate);
         Date end = DateFormatUtils.formatDate(endDate);
@@ -102,5 +106,11 @@ public class UserService {
         if (!orderService.existsById(orderId)) {
            throw new OrderNotFoundException(orderId);
        }
+    }
+
+    private void validDate(LocalDate startDate, LocalDate endDate) {
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            throw new InvalidDateIntervalException();
+        }
     }
 }

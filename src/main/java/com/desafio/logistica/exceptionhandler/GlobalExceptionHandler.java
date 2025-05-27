@@ -2,6 +2,7 @@ package com.desafio.logistica.exceptionhandler;
 
 
 import com.desafio.logistica.exeption.ErrorFileException;
+import com.desafio.logistica.exeption.InvalidDateIntervalException;
 import com.desafio.logistica.exeption.OrderNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,15 @@ public class GlobalExceptionHandler {
         var bodyResponse = bodyResponseError(ex.getMessage(), request, HttpStatus.PAYLOAD_TOO_LARGE);
 
         return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(bodyResponse);
+    }
+
+    @ExceptionHandler(InvalidDateIntervalException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidDateInterval(
+            InvalidDateIntervalException ex,
+            HttpServletRequest request
+    ) {
+        var bodyResponse = bodyResponseError(ex.getMessage(), request, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bodyResponse);
     }
 
     @ExceptionHandler(Exception.class)
