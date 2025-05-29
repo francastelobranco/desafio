@@ -2,17 +2,22 @@ package com.desafio.logistica.dto;
 
 import com.desafio.logistica.model.OrderEntity;
 import com.desafio.logistica.model.UserEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Schema(description = "Usuário com seus respectivos pedidos e produtos adquiridos")
 public class UserDto {
 
+    @Schema(description = "ID do usuário", example = "11")
     private Integer userId;
 
+    @Schema(description = "Nome do usuário", example = "Palmer Prosacco")
     private String name;
 
+    @Schema(description = "Lista de pedidos do usuário")
     private List<OrderDto> orders;
 
     public UserDto() {

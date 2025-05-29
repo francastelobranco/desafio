@@ -27,3 +27,9 @@ spring:
       root: INFO
       org.springframework.web: DEBUG
       com.bank.credit_card_service: ERROR
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

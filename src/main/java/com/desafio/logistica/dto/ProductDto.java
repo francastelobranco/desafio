@@ -1,16 +1,20 @@
 package com.desafio.logistica.dto;
 
 import com.desafio.logistica.model.ProductEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Schema(description = "Produto pertencente a um pedido")
 public class ProductDto {
 
+    @Schema(description = "ID do produto", example = "10")
     private Integer productId;
 
+    @Schema(description = "Valor do produto", example = "798.03")
     private BigDecimal value;
 
     public ProductDto(Integer productId, BigDecimal value) {
