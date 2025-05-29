@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql_logistica
+    networks:
+      - clientes-compose-network
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: logistica
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    networks:
+      - clientes-compose-network
+    ports:
+      - 5000:80
+    environment:
+      PMA_HOST: mysql
+
+  app:
+    build: .
+    container_name: logistica_app
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/logistica?createDatabaseIfNotExist=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
+    restart: on-failure
+    networks:
+      - clientes-compose-network
+
+volumes:
+  mysql_data:
+
+networks:
+  clientes-compose-network:
+    driver: bridge
