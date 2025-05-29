@@ -67,6 +67,23 @@ O parâmetro createDatabaseIfNotExist=true permite que o banco seja criado autom
 ./mvnw spring-boot:run
 ```
 
+## Executando com Docker Compose
+O projeto já inclui um Dockerfile e um docker-compose.yml com:
+- API Logística rodando em http://localhost:8080
+- MySQL (porta 3307)
+- phpMyAdmin acessível em http://localhost:5000
+
+### Para rodar tudo com Docker:
+```bash
+docker-compose up --build
+```
+### Acessos:
+- Swagger UI: http://localhost:8080/swagger-ui.html
+- phpMyAdmin: http://localhost:5000
+- Servidor: mysql
+- Usuário: root
+- Senha: 123456
+
 ## Testes
 Para executar os testes unitários:
 ```bash
