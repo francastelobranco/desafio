@@ -48,11 +48,7 @@ Pré-requisitos
 ```bash
 git clone git@github.com:francastelobranco/desafio.git
 ```
-2. Crie o banco MySQL:
-```bash
-CREATE DATABASE logistica CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-3. No application.yml, os dados de acesso ao banco já estão definidos:
+2. No application.yml, os dados de acesso ao banco já estão definidos:
 ```bash
 spring:
   datasource:
@@ -62,7 +58,7 @@ spring:
 ```
 O parâmetro createDatabaseIfNotExist=true permite que o banco seja criado automaticamente caso ainda não exista.
 
-4. Rodar a aplicação via Maven (modo desenvolvimento)
+3. Rodar a aplicação via Maven (modo desenvolvimento)
 ```bash
 ./mvnw spring-boot:run
 ```
