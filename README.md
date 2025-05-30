@@ -93,7 +93,7 @@ Relatório gerado em `target/site/jacoco/index.html`.
 
 
 ## API
-- **URL:** `/user/upload`
+- **URL:** `/api/v1/user/upload`
 - **Método:** `POST`
 - **Descrição:** Recebe um `.txt` com dados desnormalizados e persiste usuários, pedidos e produtos.
 
@@ -106,7 +106,7 @@ Relatório gerado em `target/site/jacoco/index.html`.
 | 413    | PAYLOAD TOO LARGE     | Tamanho do arquivo excede o limite.            |
 
 ##### Buscar Usuários com Filtros:
-- **URL:** `/user/find`
+- **URL:** `/api/v1/user/find`
 - **Método:** `GET`
 - **Descrição:** Retorna a lista de usuários com seus pedidos e produtos, permitindo filtragem opcional por `orderId`, `startDate` e `endDate`.
 #### Parâmetros de Query (opcionais):
